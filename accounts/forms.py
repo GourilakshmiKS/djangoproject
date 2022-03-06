@@ -5,4 +5,4 @@ from django.forms import ModelForm
 class AddContactForm(ModelForm):
     class Meta:
         model=Contact
-        fields='__all__'
+        fields=['name','mobile']

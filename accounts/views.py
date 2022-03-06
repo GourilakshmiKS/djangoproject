@@ -7,7 +7,8 @@ from .models import *
 # Create your views here.
 class Index(View):
     def get(self,request):
-        contact=Contact.objects.all()
+        user=request.user
+        contact=Contact.objects.filter(user=user)
         context={'contact':contact}
         return render(request,'index.html',context)
 
@@ -18,9 +19,12 @@ class AddContact(View):
         return render(request,'add.html',context)
 
     def post(self,request):
+        user=request.user
         form=AddContactForm(request.POST)            
         if form.is_valid():
-            form.save()
+            f=form.save(commit=False)
+            f.user=user
+            f.save()
         return redirect('index')
 
 
