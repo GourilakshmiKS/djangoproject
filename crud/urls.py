@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',Index.as_view(),name='index'),
     path('add/',AddContact.as_view(),name='add'),
+    path('edit/<id>/',EditContact.as_view(),name='edit'),
 ]

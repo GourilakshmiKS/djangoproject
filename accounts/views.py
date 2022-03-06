@@ -21,5 +21,38 @@ class AddContact(View):
         form=AddContactForm(request.POST)            
         if form.is_valid():
             form.save()
-        return redirect('index')    
+        return redirect('index')
 
+
+class EditContact(View):
+    def get(self,request,id):
+        contact=Contact.objects.get(id=id)
+
+        form=AddContactForm(instance=contact)
+        context={'contact':contact,'form':form}
+        return render(request,'edit.html',context)
+
+    def post(self,request,id):
+        
+        contact=Contact.objects.get(id=id)
+        form=AddContactForm(request.POST,instance=contact)
+                    
+        if form.is_valid():
+            form.save()
+        return redirect('index')
+
+
+'''class DeleteContact(View):
+    def get(self,request,id):
+        contact=Contact.objects.get(id=id)
+        context={'contact':contact}
+        return render(request,'delete.html',context)
+
+    def post(self,request,id):
+        
+        contact=Contact.objects.get(id=id)
+        form=AddContactForm(request.POST,instance=contact)
+                    
+        if form.is_valid():
+            form.save()
+        return redirect('index') '''       
