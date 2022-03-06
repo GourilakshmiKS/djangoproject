@@ -1,10 +1,36 @@
 from django.shortcuts import render,redirect
 from django.views import View
+from django.contrib.auth import authenticate,login,logout
 
 from .forms import *
 from .models import *
 
 # Create your views here.
+class LoginView(View):
+    def get(self,request):
+        user=request.user
+        if user.is_authenticated:
+            return redirect('index')
+        else:
+            msg=""
+            return render(request,'login.html',{'msg':msg})  
+
+    def post(self,request):
+        username=request.POST['username'] 
+        password=request.POST['password']
+        user=authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('index')
+        else:
+            msg="Invalid User"
+            return render(request,'login.html',{'msg':msg})              
+
+class LogoutView(View):
+    def get(self,request):
+        logout(request)
+        return redirect('login')            
+
 class Index(View):
     def get(self,request):
         user=request.user

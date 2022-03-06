@@ -19,6 +19,8 @@ from accounts.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/',LoginView.as_view(),name='login'),
+    path('logout/',LogoutView.as_view(),name='logout'),
     path('',Index.as_view(),name='index'),
     path('add/',AddContact.as_view(),name='add'),
     path('edit/<id>/',EditContact.as_view(),name='edit'),
