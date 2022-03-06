@@ -20,7 +20,7 @@
             <td>{{i.mobile}}</td>
             
             <td><a href="{% url 'edit' i.id %}">Edit</a></td>
-            <td><a href="#">Delete</a></td>
+            <td><a href="{% url 'delete' i.id %}">Delete</a></td>
 
         </tr>
         {% endfor %}

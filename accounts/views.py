@@ -42,7 +42,7 @@ class EditContact(View):
         return redirect('index')
 
 
-'''class DeleteContact(View):
+class DeleteContact(View):
     def get(self,request,id):
         contact=Contact.objects.get(id=id)
         context={'contact':contact}
@@ -51,8 +51,5 @@ class EditContact(View):
     def post(self,request,id):
         
         contact=Contact.objects.get(id=id)
-        form=AddContactForm(request.POST,instance=contact)
-                    
-        if form.is_valid():
-            form.save()
-        return redirect('index') '''       
+        contact.delete()
+        return redirect('index')      
